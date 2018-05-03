@@ -1,0 +1,195 @@
+<div class="container">
+<div class="page-header">
+
+
+<div class="container" ng-controller="showCtrl"> 
+<ul class="nav nav-tabs">
+	<li role="presentation" ng-click="danePhase();" ng-class="daneTab"><a href="#">Dane</a></li>
+	<li role="presentation" ng-click="hasloPhase();" ng-class="hasloTab"><a href="#">Zmień hasło</a></li>
+	<li role="presentation" ng-click="rezPhase();" ng-class="rezTab" ng-show="!main.authorized"><a href="#">Rezerwacje</a></li>
+</ul>
+
+
+<div class="profile" ng-controller="profileCtrl"> 
+
+
+	<div class="container" ng-show="phase1"  ><br>
+
+
+<form name="daneForm" ng-submit="submit2(daneData, daneForm.$valid)" novalidate>
+
+
+	<div ng-class="{'has-success':(daneForm.newImie.$valid && !daneForm.newImie.$pristine), 'has-error':(!daneForm.newImie.$valid && !daneForm.newImie.$pristine) || (!daneForm.newImie.$valid && daneForm.$submitted)}">
+		<label>Imię:</label>
+		<input  class="form-control" type="text" name="newImie" placeholder="Podaj newImie" ng-model="daneData.newImie" ng-pattern="/^[a-zA-Z]+$/" ng-minlength="3" ng-maxlength="20" required>
+		<p class="help-block" ng-show="(!daneForm.newImie.$pristine && daneForm.newImie.$error.required) || (daneForm.$submitted && daneForm.newImie.$error.required)">This field is required</p>
+		<!-- <p class="help-block" ng-show="edit.newImieMsg && !daneForm.newImie.$error.required && daneForm.newImie.$valid">{{ edit.newImieMsg }}</p> -->
+		<ul class="help-block" ng-show="(!daneForm.newImie.$pristine && daneForm.newImie.$error.pattern) || (!daneForm.newImie.$pristine && daneForm.newImie.$error.minlength) || (!daneForm.newImie.$pristine && daneForm.newImie.$error.maxlength)">
+			<li>Nie może zawierać żadnych znaków specjalnych</li>
+            <li>Nie może zawierać żadnych cyfr</li>
+            <li>Musi zawierać przynajmniej 3 znaki, ale nie więcej niż 20</li>
+      	</ul>
+	</div>
+<br>
+
+	<div ng-class="{'has-success':(daneForm.newNazwisko.$valid && !daneForm.newNazwisko.$pristine), 'has-error':(!daneForm.newNazwisko.$valid && !daneForm.newNazwisko.$pristine) || (!daneForm.newNazwisko.$valid && daneForm.$submitted)}">
+
+	<label>Nazwisko:</label>
+	<input class="form-control" type="text" name="newNazwisko" placeholder="Podaj newNazwisko" ng-model="daneData.newNazwisko" ng-pattern="/^[a-zA-Z]+$/" ng-minlength="3" ng-maxlength="20" required>
+	<br>
+	<p class="help-block" ng-show="(!daneForm.newNazwisko.$pristine && daneForm.newNazwisko.$error.required) || (daneForm.$submitted && daneForm.newNazwisko.$error.required)">To pole jest wymagane</p>
+		<ul class="help-block" ng-show="(!daneForm.newNazwisko.$pristine && daneForm.newNazwisko.$error.pattern) || (!daneForm.newNazwisko.$pristine && daneForm.newNazwisko.$error.minlength) || (!daneForm.newNazwisko.$pristine && daneForm.newNazwisko.$error.maxlength)">
+             <li>Nie może zawierać żadnych znaków specjalnych</li>
+            <li>Nie może zawierać żadnych cyfr</li>
+            <li>Musi zawierać przynajmniej 3 znaki, ale nie więcej niż 20</li>
+            </ul>
+	</div>
+
+
+
+<div ng-class="{'has-success':(daneForm.newTelefon.$valid && !daneForm.newTelefon.$pristine), 'has-error':(!daneForm.newTelefon.$valid && !daneForm.newTelefon.$pristine) || (!daneForm.newTelefon.$valid && daneForm.$submitted)}">
+	<label>Nr telefonu:</label>
+	<input class="form-control" type="tel" name="newTelefon" placeholder="Podaj nr newTelefonu" ng-model="daneData.newTelefon" ng-pattern="/\d{9}/" ng-minlength="9" ng-maxlength="9" required>
+	<br>
+<p class="help-block" ng-show="(!daneForm.newTelefon.$pristine && daneForm.newTelefon.$error.required) || (daneForm.$submitted && daneForm.newTelefon.$error.required)">To pole jest wymagane</p>
+		<ul class="help-block" ng-show="(!daneForm.newTelefon.$pristine && daneForm.newTelefon.$error.pattern) || (!daneForm.newTelefon.$pristine && daneForm.newTelefon.$error.minlength) || (!daneForm.newTelefon.$pristine && daneForm.newTelefon.$error.maxlength)">
+                <li>Może zawierać tylko 9 cyfr</li>
+            </ul>
+	</div>
+
+
+<!--   <input type="submit" id="submit" value="Submit" /> -->
+
+  <button class="btn btn-primary"  type="submit" value="Submit">Potwierdź</button>
+
+</form>
+<div class="row show-hide-message" ng-show="successMsg">
+	<div class="aler alert-success">{{ successMsg }}</div>
+</div>
+
+<br>
+
+<div class="row show-hide-message" ng-show="errorMsg">
+	<div class="aler alert-danger">{{ errorMsg }}</div>
+</div>
+
+</div>
+
+
+
+<table ng-show="phase3 && !main.instr" class="table">
+	<tr>
+		<th colspan="4"><h4><b>Aktualne rezerwacje - instruktor Jan Kowalski</b></h4></th>
+	</tr>
+	<tr>
+		<th>Data</th>
+		<th>Początek</th>
+		<th>Koniec</th>
+		<th></th>
+	</tr>
+  <tr id="{{$index + 1}}" ng-repeat="x in names3 | orderBy:'data'">
+  	<td>{{ x.data}}</td>
+    <td >{{ x.poczatek }}</td>
+    <td>{{ x.koniec }}</td>
+    <td class="hide">{{ x.id_event }}</td>
+    <td><button class="btn btn-primary" data-ng-click="ShowId($event)">Usuń rezerwację</button></td>
+  </tr>
+</table>
+<br>
+<table ng-show="phase3 && !main.instr" class="table">
+	<tr>
+		<th colspan="4"><h4><b>Aktualne rezerwacje - instruktor Krystyna Nowak</b></h4></th>
+	</tr>
+	<tr>
+		<th>Data</th>
+		<th>Początek</th>
+		<th>Koniec</th>
+		<th></th>
+	</tr>
+  <tr id="{{$index + 1}}" ng-repeat="x in names2 | orderBy:'data'">
+  	<td>{{ x.data}}</td>
+    <td >{{ x.poczatek }}</td>
+    <td>{{ x.koniec }}</td>
+    <td class="hide">{{ x.id_event }}</td>
+    <td><button class="btn btn-primary" data-ng-click="ShowId($event)">Usuń rezerwację</button></td>
+  </tr>
+</table>
+
+<br>
+<table ng-show="phase3 && main.instr" class="table">
+	<tr>
+		<th colspan="4"><h4><b>Aktualne rezerwacje</b></h4></th>
+	</tr>
+	<tr>
+		<th>Data</th>
+		<th>Początek</th>
+		<th>Koniec</th>
+		<th>Kursant</th>
+		<th></th>
+	</tr>
+  <tr id="{{$index + 1}}" ng-repeat="x in rezerw | orderBy:'data'">
+  	<td>{{ x.data}}</td>
+    <td >{{ x.poczatek }}</td>
+    <td>{{ x.koniec }}</td>
+    <td class="hide">{{ x.id_event }}</td>
+    <td>{{ x.imie }} {{ x.nazwisko }}</td>
+
+    <td><button class="btn btn-primary" data-ng-click="ShowId($event)">Usuń rezerwację</button></td>
+  </tr>
+</table>
+</div>
+
+
+
+<div ng-show="phase2" class="container" ng-controller="passwordCtrl" >
+
+<form name="psswdForm" ng-submit="submit(psswdData, psswdForm.$valid)" novalidate>
+
+
+<label>Aktualne hasło:</label><input placeholder="Podaj aktualne hasło" class="form-control" type="password" name="oldPassword" ng-model="psswdData.oldPassword"><br>
+
+<div ng-class="{'has-success':(psswdForm.newPassword.$valid && !psswdForm.newPassword.$pristine), 'has-error':(!psswdForm.newPassword.$valid && !psswdForm.newPassword.$pristine) || (!psswdForm.newPassword.$valid && psswdForm.$submitted)}">
+		<label>Hasło:</label>
+		<input class="form-control" type="password" name="newPassword" placeholder="Podaj hasło (min 8 znaków)" ng-model="psswdData.newPassword" ng-minlength="8" ng-maxlength="32" ng-pattern="/^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[\d]).{8,32}$/" required>
+		<br>
+		<p class="help-block" ng-show="(!psswdForm.newPassword.$pristine && psswdForm.newPassword.$error.required) || (psswdForm.$submitted && psswdForm.newPassword.$error.required)">To pole jest wymagane</p>
+		<ul class="help-block" ng-show="(!psswdForm.newPassword.$pristine && psswdForm.newPassword.$error.pattern) || (!psswdForm.newPassword.$pristine && psswdForm.newPassword.$error.minlength) || (!psswdForm.newPassword.$pristine && psswdForm.newPassword.$error.maxlength)">
+			<li>Musi zawierać przynajmniej jedną dużą literę</li>
+            <li>Musi zawierać przynajmniej jedną małą literę</li>
+            <li>Musi zawierać przynajmniej jedną cyfrę</li>
+			<li>Musi zawierać przynajmniej 8 znaków, ale nie więcej niż 32</li>
+
+            </ul>
+	</div>
+
+<div ng-class="{'has-success' :confirmed && !psswdForm.confirmednewpassword.$error.required, 'has-error':(!confirmed && !psswdForm.confirmednewpassword.$error.required) || (psswdForm.confirmednewpassword.$error.required && !psswdForm.confirmednewpassword.$pristine) || (psswdForm.$submitted && psswdForm.confirmednewpassword.$error.required) }">
+
+	<label>Powtórz hasło:</label>
+	<input class="form-control" type="password" name="confirmednewpassword" placeholder="Powtórz hasło" match="{{[psswdData.newPassword]}}" ng-change="psswdData.confirmednewpassword = confirm" ng-model="confirm" required>
+	<p class="help-block" ng-show="(!psswdForm.confirmednewpassword.$pristine && psswdForm.confirmednewpassword.$error.required) || (psswdForm.$submitted && psswdForm.confirmednewpassword.$error.required)">To pole jest wymagane</p>
+	<p class="help-block" ng-show="!confirmed && !psswdForm.confirmednewpassword.$pristine && psswdForm.newPassword.$valid">Hasła nie są takie same</p>
+	<br>
+	
+
+</div>
+
+
+  <button class="btn btn-primary"  type="submit" value="Submit">Potwierdź</button>
+
+</form>
+
+<br>
+
+<div class="row show-hide-message" ng-show="successMsg">
+	<div class="aler alert-success">{{ successMsg }}</div>
+</div>
+
+<br>
+
+<div class="row show-hide-message" ng-show="errorMsg">
+	<div class="aler alert-danger">{{ errorMsg }}</div>
+</div>
+
+</div>
+
+</div>

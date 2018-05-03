@@ -1,0 +1,146 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+  	<base href="/">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/animate.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/angularjs-datepicker/2.1.23/angular-datepicker.css">
+
+
+    <script src="assets/js/angular.js"></script>
+    <script src="assets/js/angular-route.js"></script>
+    <script src="app/app.js"></script>
+    <script src="app/routes.js"></script>
+    <script src="app/controllers/userCtrl.js"></script>
+    <script src="app/controllers/mainCtrl.js"></script>
+  <script src="app/controllers/toggleCtrl.js"></script>
+    <script src="app/controllers/calCtrl.js"></script>
+    <script src="app/controllers/profileCtrl.js"></script>
+    <script src="app/controllers/managmentCtrl.js"></script>
+    <script src="app/controllers/passwdCtrl.js"></script>
+    <script src="app/services/authServices.js"></script>
+    <script src="assets/js/angular-animate.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angularjs-datepicker/2.1.23/angular-datepicker.js"></script>
+  <script src="assets/js/dhtmlxscheduler.js" type="text/javascript" charset="utf-8"></script>
+  <script src="assets/js/locale_pl.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="assets/css/dhtmlxscheduler.css" type="text/css" media="screen" title="no title" charset="utf-8">
+
+    <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+    
+  </head>
+
+  <body ng-app="userApp" ng-controller="mainCtrl as main" ng-show="main.loadme" ng-cloak >
+
+
+
+
+ <nav class="navbar navbar-default navbar-fixed-top navbar-shrink">
+        <div class="container">
+          
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+             
+                <a class="page-scroll" href="/"><img class="logo" src="img/logo.jpg"></a>
+            </div>
+
+          
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden active">
+                        <a href="#page-top"></a>
+                    </li>                   
+                   <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Materiały <span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                        <li ><a href="/kodeks">Kodeks</a></li>
+                        <li><a href="/znaki">Znaki</a></li>           
+                      </ul>
+                    </li>
+
+
+                    <li class="">
+                        <a class="page-scroll" href="/cennik">Cennik</a>
+                    </li>
+                    
+
+                     <li class="">
+                        <a ng-show="main.isLoggedIn && main.confirmeduser && main.isuser" class="page-scroll" href="/zarezerwuj">Zarezerwuj</a>
+                    </li>
+                    <li class="">
+                        <a class="page-scroll" ng-show="!main.isLoggedIn" href="/login">Zaloguj</a>
+                    </li>
+                    <li class="">
+                        <a  class="page-scroll" ng-show="!main.isLoggedIn" href="/register">Zarejestruj</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                      <a  ng-show="main.isLoggedIn && main.authorized" class="page-scroll"  href="/managment" >Zarządzaj</a>
+                    </li>
+                    <li class="nav-item">
+                      <a  ng-show="main.isLoggedIn && main.confirmeduser" class="page-scroll"  href="/profile">Profil</a>
+                    </li>
+                    <li class="">
+                        <a class="page-scroll" href="/kontakt">Kontakt</a>
+                    </li>
+                    <li class="nav-item">
+                      <a  ng-show="main.isLoggedIn" class="page-scroll"  href="#" ng-click="main.logout();">Wyloguj</a>
+                    </li>
+
+
+
+                </ul>
+            </div>
+
+
+        </div>
+
+    </nav>
+
+
+
+    <main role="main">
+
+   
+      <div class="container-fluid">
+   <br>
+        <div ng-view></div>
+
+
+
+
+        <hr>
+    </div>
+
+    </main>
+
+
+    <footer >
+      <div class="container">
+      <p>&copy; Adrian Pietrzak</p>
+      </div>
+    </footer>
+
+    
+    <script src="assets/js/jquery-3.2.1.min.js"></script>
+    <script src="assets/js/bootstrap.js"></script>
+
+  
+
+  </body>
+</html>

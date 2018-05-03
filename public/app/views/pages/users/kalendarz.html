@@ -1,0 +1,87 @@
+<div class="container">
+
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Zarezerwuj termin jazdy</h4>
+        </div>
+        <div class="modal-body">
+          <form ng-submit="calendar.calDate(calData);">
+	Data
+
+<input class="form-control" min="{{min | date: 'yyyy-MM-dd'}}" max="{{max | date: 'yyyy-MM-dd'}}"  type="date" name="date" ng-model="calendar.calData.date" ng-change="data()">
+	<br>
+	
+
+	Godzina rozpoczęcia<select id="start" class="form-control" name="start" ng-model="calendar.calData.start" ng-change="poczatek()">
+		  <option ng-disabled="p8.isDisabled" id="8" value="08:00">08:00</option>
+		  <option ng-disabled="p9.isDisabled" id="9" value="09:00">09:00</option>
+		  <option ng-disabled="p10.isDisabled" id="10" value="10:00">10:00</option>
+		  <option ng-disabled="p11.isDisabled" id="11" value="11:00">11:00</option>
+		  <option ng-disabled="p12.isDisabled" id="12" value="12:00">12:00</option>
+		  <option ng-disabled="p13.isDisabled" id="13" value="13:00">13:00</option>
+		  <option ng-disabled="p14.isDisabled" id="14" value="14:00">14:00</option>
+		  <option ng-disabled="p15.isDisabled" id="15" value="15:00">15:00</option>
+	</select>
+<br>
+
+		Godzina zakończenia<select class="form-control" name="end" ng-model="calendar.calData.end">
+		  <option ng-disabled="p0.isDisabled" id="0" value="09:00">09:00</option>
+		  <option ng-disabled="p1.isDisabled" id="1" value="10:00">10:00</option>
+		  <option ng-disabled="p2.isDisabled" id="2" value="11:00">11:00</option>
+		  <option ng-disabled="p3.isDisabled" id="3" value="12:00">12:00</option>
+		  <option ng-disabled="p4.isDisabled" id="4" value="13:00">13:00</option>
+		  <option ng-disabled="p5.isDisabled" id="5" value="14:00">14:00</option>
+		  <option ng-disabled="p6.isDisabled" id="6" value="15:00">15:00</option>
+		  <option ng-disabled="p7.isDisabled" id="7" value="16:00">16:00</option>
+		  
+	</select>
+<br>
+
+	<button class="btn btn-primary" type="submit" onclick="$('.modal').modal('hide')">Rezerwuj</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Zamnknij</button>
+        </div>
+</form>
+
+
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+
+</div>
+
+
+
+<div class="container">
+	<div class="row show-hide-message" ng-show="calendar.successMsg">
+	<div class="aler alert-success">{{ calendar.successMsg }}</div>
+</div>
+
+<br>
+
+<div class="row show-hide-message" ng-show="calendar.errorMsg">
+	<div class="aler alert-danger">{{ calendar.errorMsg }}</div>
+</div>
+
+  <div id="target"></div>
+<div dhx-scheduler class="kalendarz">
+	
+        <div class="dhx_cal_prev_button">&nbsp;</div>
+        <div class="dhx_cal_next_button">&nbsp;</div>
+        <div class="dhx_cal_today_button"></div>
+        <div  class="dhx_cal_date"></div>
+        <div class="dhx_cal_tab" name="day_tab"></div>
+        <div  class="dhx_cal_tab" name="week_tab"></div>
+        <div class="dhx_cal_tab" name="month_tab"></div>  
+
+
+    </div>
+
+
+</div>

@@ -1,0 +1,74 @@
+<div class="container managment">
+<div class="page-header">
+	<h1>Edytuj użytkownika</h1>
+</div>
+
+<br>
+
+<ul class="nav nav-tabs">
+	<li role="presentation" ng-click="edit.danePhase();" ng-class="daneTab"><a href="#">Dane</a></li>
+	<li role="presentation" ng-click="edit.permissionPhase();" ng-class="permissionTab"><a href="#">Uprawnienia</a></li>
+</ul>
+<br>
+<form name="edit.daneForm" ng-show="edit.phase1" ng-submit="edit.updateDane(newImie, newNazwisko, newEmail, edit.daneForm.imie.$valid)" novalidate>
+	<div ng-class="{'has-success':(edit.daneForm.imie.$valid && !edit.daneForm.imie.$pristine && !edit.imieInvalid), 'has-error':(!edit.daneForm.imie.$valid && !edit.daneForm.imie.$pristine) || (!daneForm.imie.$valid && daneForm.$submitted) || edit.imieInvalid}">
+		<label>Imię:</label>
+		<input ng-blur="edit.checkimie(daneForm);" class="form-control" type="text" name="imie" placeholder="Podaj imie" ng-model="newImie" ng-pattern="/^[a-zA-Z]+$/" ng-minlength="3" ng-maxlength="20" required>
+		<p class="help-block" ng-show="(!edit.daneForm.imie.$pristine && edit.daneForm.imie.$error.required) || (edit.daneForm.$submitted && edit.daneForm.imie.$error.required)">To pole jest wymagane</p>
+		<ul class="help-block" ng-show="(!edit.daneForm.imie.$pristine && edit.daneForm.imie.$error.pattern) || (!edit.daneForm.imie.$pristine && edit.daneForm.imie.$error.minlength) || (!edit.daneForm.imie.$pristine && edit.daneForm.imie.$error.maxlength)">
+			<li>Nie może zawierać żadnych znaków specjalnych</li>
+            <li>Nie może zawierać żadnych cyfr</li>
+            <li>Musi zawierać przynajmniej 3 znaki, ale nie więcej niż 20</li>
+      	</ul>
+	</div>
+<br>
+
+
+	<div ng-class="{'has-success':(edit.daneForm.nazwisko.$valid && !edit.daneForm.nazwisko.$pristine), 'has-error':(!edit.daneForm.nazwisko.$valid && !edit.daneForm.nazwisko.$pristine) || (!edit.daneForm.nazwisko.$valid && edit.daneForm.$submitted)}">
+
+	<label>Nazwisko:</label>
+	<input class="form-control" type="text" name="nazwisko" placeholder="Podaj nazwisko" ng-model="newNazwisko" ng-pattern="/^[a-zA-Z]+$/" ng-minlength="3" ng-maxlength="20" required>
+	<br>
+	<p class="help-block" ng-show="(!edit.daneForm.nazwisko.$pristine && edit.daneForm.nazwisko.$error.required) || (edit.daneForm.$submitted && edit.daneForm.nazwisko.$error.required)">To pole jest wymagane</p>
+		<ul class="help-block" ng-show="(!edit.daneForm.nazwisko.$pristine && edit.daneForm.nazwisko.$error.pattern) || (!edit.daneForm.nazwisko.$pristine && edit.daneForm.nazwisko.$error.minlength) || (!edit.daneForm.nazwisko.$pristine && edit.daneForm.nazwisko.$error.maxlength)">
+                <li>Nie może zawierać żadnych znaków specjalnych</li>
+	            <li>Nie może zawierać żadnych cyfr</li>
+	            <li>Musi zawierać przynajmniej 3 znaki, ale nie więcej niż 20</li>
+            </ul>
+	</div>
+
+	<button ng-disabled="edit.disabled" class="btn btn-primary" type="submit">Zaktualizuj</button>
+</form>
+
+
+
+
+
+<div ng-show="edit.phase2">
+	<label>Aktualny typ konta:&nbsp&nbsp</label>{{ typkonta }}<br>
+	<label>Aktualne uprawnienia:&nbsp&nbsp</label>{{ newPermission }}
+	<br>
+	<br>
+	<button ng-disabled="edit.disabledUser" ng-click="edit.updatePermissions('user');" type="button" class="btn btn-success">User</button>&nbsp
+	<button ng-disabled="edit.disabledInstructor" ng-click="edit.updatePermissions('instructor');" type="button" class="btn btn-info">Instructor</button>&nbsp
+	<button ng-disabled="edit.disabledAdmin" ng-click="edit.updatePermissions('admin');" type="button" class="btn btn-warning">Administrator</button>&nbsp
+	
+</div>
+
+
+
+
+
+<div class="row show-hide-message" ng-show="edit.successMsg">
+	<div class="aler alert-success">{{ edit.successMsg }}</div>
+</div>
+
+<br>
+
+<div class="row show-hide-message" ng-show="edit.errorMsg">
+	<div class="aler alert-danger">{{ edit.errorMsg }}</div>
+</div>
+
+
+</div>
+

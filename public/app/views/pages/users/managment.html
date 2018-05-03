@@ -1,0 +1,77 @@
+<div class="container managment">
+<div class="page-header">
+	<h1>Zarządzanie</h1>
+</div>
+
+
+
+
+<div class="jumbotron text-center" ng-show="main.loading">
+	<span class="glyphicon glyphicon-repeat spinner"></span>
+	<p>Ładowanie...</p>
+</div>
+
+<br>
+
+<button type="button" class="btn btn-success" ng-click="managment.showMore(number)">Zastosuj filtr</button>
+<button type="button" class="btn btn-warning" ng-click="managment.showAll()">Pokaż wszystkie</button>
+<div class="showmore">
+	<div class="col-lg-6">
+		<div class="input-group">
+			<span class="input-group-addon">Wyniki do pokazania</span>
+			<input type="text" class="form-control" ng-model="number">
+		</div>
+	</div>
+</div>
+
+<br><br>
+
+
+<div class="row show-hide-message" ng-show="managment.showMoreError">
+	<div class="aler alert-danger">{{ managment.showMoreError }}</div>
+</div>
+<br>
+
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<strong>Zarządzanie użytkownikiem</strong>
+	</div>
+	<table class="table">
+		<tr>
+			<th>Imie</th>
+			<th>Nazwisko</th>
+			<th>Email</th>
+			<th>Uprawnienia</th>
+
+		</tr>
+		<tr ng-repeat="person in managment.users | limitTo: managment.limit">
+			<td>{{person.imie}}</td>
+			<td>{{person.nazwisko}}</td>
+			<td>{{person.email}}</td>
+			<td>{{person.permission}}</td>
+
+			<td>
+				<a href="/edit/{{ person.email }}">
+					<button type="button" ng-show="managment.editAccess" class="btn btn-primary">Edytuj</button>
+				</a>
+					<button type="button" ng-click="managment.deleteUser(person.email);" ng-show="managment.deleteAccess" class="btn btn-danger">Usuń</button>
+			</td>
+		</tr>
+	</table>
+</div>
+<br>
+
+<button type="button" class="btn btn-success" ng-click="managment.showMore(number)">Zastosuj filtr</button>
+<button type="button" class="btn btn-warning" ng-click="managment.showAll()">Pokaż wszystkie</button>
+<div class="showmore">
+	<div class="col-lg-6">
+		<div class="input-group">
+			<span class="input-group-addon">Wyniki do pokazania</span>
+			<input type="text" class="form-control" ng-model="number">
+		</div>
+	</div>
+</div>
+<br>
+<br>
+
+</div>
