@@ -21,9 +21,8 @@
 
 	<div ng-class="{'has-success':(daneForm.newImie.$valid && !daneForm.newImie.$pristine), 'has-error':(!daneForm.newImie.$valid && !daneForm.newImie.$pristine) || (!daneForm.newImie.$valid && daneForm.$submitted)}">
 		<label>Imię:</label>
-		<input  class="form-control" type="text" name="newImie" placeholder="Podaj newImie" ng-model="daneData.newImie" ng-pattern="/^[a-zA-Z]+$/" ng-minlength="3" ng-maxlength="20" required>
+		<input  class="form-control" type="text" name="newImie" placeholder="Podaj Imię" ng-model="daneData.newImie" ng-pattern="/^[a-zA-Z]+$/" ng-minlength="3" ng-maxlength="20" required>
 		<p class="help-block" ng-show="(!daneForm.newImie.$pristine && daneForm.newImie.$error.required) || (daneForm.$submitted && daneForm.newImie.$error.required)">This field is required</p>
-		<!-- <p class="help-block" ng-show="edit.newImieMsg && !daneForm.newImie.$error.required && daneForm.newImie.$valid">{{ edit.newImieMsg }}</p> -->
 		<ul class="help-block" ng-show="(!daneForm.newImie.$pristine && daneForm.newImie.$error.pattern) || (!daneForm.newImie.$pristine && daneForm.newImie.$error.minlength) || (!daneForm.newImie.$pristine && daneForm.newImie.$error.maxlength)">
 			<li>Nie może zawierać żadnych znaków specjalnych</li>
             <li>Nie może zawierać żadnych cyfr</li>
@@ -35,7 +34,7 @@
 	<div ng-class="{'has-success':(daneForm.newNazwisko.$valid && !daneForm.newNazwisko.$pristine), 'has-error':(!daneForm.newNazwisko.$valid && !daneForm.newNazwisko.$pristine) || (!daneForm.newNazwisko.$valid && daneForm.$submitted)}">
 
 	<label>Nazwisko:</label>
-	<input class="form-control" type="text" name="newNazwisko" placeholder="Podaj newNazwisko" ng-model="daneData.newNazwisko" ng-pattern="/^[a-zA-Z]+$/" ng-minlength="3" ng-maxlength="20" required>
+	<input class="form-control" type="text" name="newNazwisko" placeholder="Podaj Nazwisko" ng-model="daneData.newNazwisko" ng-pattern="/^[a-zA-Z]+$/" ng-minlength="3" ng-maxlength="20" required>
 	<br>
 	<p class="help-block" ng-show="(!daneForm.newNazwisko.$pristine && daneForm.newNazwisko.$error.required) || (daneForm.$submitted && daneForm.newNazwisko.$error.required)">To pole jest wymagane</p>
 		<ul class="help-block" ng-show="(!daneForm.newNazwisko.$pristine && daneForm.newNazwisko.$error.pattern) || (!daneForm.newNazwisko.$pristine && daneForm.newNazwisko.$error.minlength) || (!daneForm.newNazwisko.$pristine && daneForm.newNazwisko.$error.maxlength)">
@@ -49,7 +48,7 @@
 
 <div ng-class="{'has-success':(daneForm.newTelefon.$valid && !daneForm.newTelefon.$pristine), 'has-error':(!daneForm.newTelefon.$valid && !daneForm.newTelefon.$pristine) || (!daneForm.newTelefon.$valid && daneForm.$submitted)}">
 	<label>Nr telefonu:</label>
-	<input class="form-control" type="tel" name="newTelefon" placeholder="Podaj nr newTelefonu" ng-model="daneData.newTelefon" ng-pattern="/\d{9}/" ng-minlength="9" ng-maxlength="9" required>
+	<input class="form-control" type="tel" name="newTelefon" placeholder="Podaj nr Telefonu" ng-model="daneData.newTelefon" ng-pattern="/\d{9}/" ng-minlength="9" ng-maxlength="9" required>
 	<br>
 <p class="help-block" ng-show="(!daneForm.newTelefon.$pristine && daneForm.newTelefon.$error.required) || (daneForm.$submitted && daneForm.newTelefon.$error.required)">To pole jest wymagane</p>
 		<ul class="help-block" ng-show="(!daneForm.newTelefon.$pristine && daneForm.newTelefon.$error.pattern) || (!daneForm.newTelefon.$pristine && daneForm.newTelefon.$error.minlength) || (!daneForm.newTelefon.$pristine && daneForm.newTelefon.$error.maxlength)">
@@ -58,7 +57,6 @@
 	</div>
 
 
-<!--   <input type="submit" id="submit" value="Submit" /> -->
 
   <button class="btn btn-primary"  type="submit" value="Submit">Potwierdź</button>
 

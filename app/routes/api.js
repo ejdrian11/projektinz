@@ -218,8 +218,9 @@ router.get('/pokazrezerwacje', function(req, res){
 
 
 	connection.query("SELECT * FROM instructors WHERE email='"+req.decoded.email+"'", function(err,result){
-			if (err) throw err;
-			if(result.length>0){
+			if (err) {
+				throw err;
+			}else if(result.length>0){
 				var id = result[0].id_instructor;
 				connection.query("SELECT * FROM events INNER JOIN users ON events.id_user = users.id_user WHERE id_instructor='"+id+"'", function(err,result2){
 					res.send(result2);

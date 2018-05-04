@@ -80,6 +80,7 @@ $scope.submit2 = function(daneData, valid) {
 
 $http.get('/api/pokazrezerwacje').then(function(response2){
        $scope.rezerw = response2.data;
+       console.log('aaa');
   });
     $http.get('/api/pokaz').then(function (response) {
        var najwieksza = 0;
