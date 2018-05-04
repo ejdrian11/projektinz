@@ -2,10 +2,10 @@ var mysql = require('mysql');
 
 var connection = mysql.createConnection({
 
-  host     : 'localhost',
-  user     : 'admin',
-  password : 'admin',
-  database : 'test'
+  host     : 'www.db4free.net',
+  user     : 'projektinzadmin',
+  password : 'admin500',
+  database : 'projektinz'
 
 });
 
